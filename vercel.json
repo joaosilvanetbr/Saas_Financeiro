@@ -1,6 +1,7 @@
 {
-  "rootDirectory": "finance-app",
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
-  ]
+  ],
+  "buildCommand": "cd finance-app && npm run build",
+  "outputDirectory": "finance-app/dist"
 }
