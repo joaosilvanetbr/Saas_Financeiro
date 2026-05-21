@@ -2,73 +2,73 @@
 
 ## 1. Concept & Vision
 
-**FinanceFlow** é um SaaS minimalista de controle financeiro pessoal, focado em simplicidade e clareza. A experiência deve transmitir **confiança e controle** — o usuário abre o app e, em segundos, entende exatamente onde está financeiramente. Interface limpa com cards informativos, navegação intuitiva e zero complexidade desnecessária.
+**FinanceFlow** é um SaaS minimalista de controle financeiro pessoal com tema **dark "lofi sunset"**. A experiência transmite **confiança e controle** — o usuário abre o app e entende onde está financeiramente. Interface escura com cards informativos, navegação por mês com setas, e funcionalidades completas de CRUD.
 
 ## 2. Design Language
 
 ### Aesthetic Direction
-Design **Clean Finance** — inspirado em apps bancários modernos como Nubank e N26. Cards com sombras sutis, tipografia clara, e uso estratégico de cor para comunicar saúde financeira (verde = positivo, vermelho = negativo).
+Design **Dark Lofi Sunset** — inspirado em apps modernos com tema escuro. Backgrounds em tons de roxo/midnight, acentos em amarelo e laranja neon, cores vibrantes para comunicar saúde financeira.
 
 ### Color Palette
-```
-Primary:        #6366F1 (Indigo-500)    — Ações principais,botões
-Secondary:      #8B5CF6 (Violet-500)    — Destaques, badges
-Success:        #10B981 (Emerald-500)   — Entradas, saldo positivo
-Danger:         #EF4444 (Red-500)       — Saídas, saldo negativo
-Background:     #F8FAFC (Slate-50)     — Fundo principal
-Surface:        #FFFFFF (White)        — Cards, componentes
-Border:         #E2E8F0 (Slate-200)     — Bordas sutis
-Text Primary:   #1E293B (Slate-800)    — Títulos
-Text Secondary: #64748B (Slate-500)    — Descrições
+```css
+Primary Background: #0f0a1a (Deep Purple Midnight)
+Secondary Background: #1a1230 (Lighter Purple)
+Surface/Cards: #251d3a (Purple Card)
+Primary Accent: #fbbf24 (Yellow/Amber)
+Secondary Accent: #f97316 (Orange)
+Success: #22c55e (Green - entradas/saldo positivo)
+Danger: #ef4444 (Red - saídas/saldo negativo)
+Text Primary: #f8fafc (Near White)
+Text Secondary: #a1a1aa (Zinc-400)
+Border: #3b3052 (Purple Border)
 ```
 
 ### Typography
 - **Headings**: Inter (700, 600) — Google Fonts
-- **Body**: Inter (400, 500) — Google Fonts
-- **Numbers/Money**: Inter (600) com feature `font-variant-numeric: tabular-nums`
+- **Body**: Inter (400, 500)
+- **Numbers/Money**: Inter (600) com `font-variant-numeric: tabular-nums`
 
 ### Spatial System
 - Base unit: 4px
 - Card padding: 24px
 - Gap between cards: 16px
-- Border radius: 12px (cards), 8px (buttons), 6px (inputs)
+- Border radius: 16px (cards), 10px (buttons), 8px (inputs)
 
 ### Motion Philosophy
 - **Transitions**: 200ms ease-out para hover states
-- **Cards**: Scale sutil (1.01) no hover
-- **Modais**: Fade-in 200ms + translateY de -8px
+- **Cards**: Scale sutil (1.02) no hover com glow
+- **Modais**: Fade-in 200ms + scale de 0.95 para 1
 - **Lista de transações**: Stagger animation de 50ms entre items
+- **Month arrows**: Scale no hover
 
 ### Visual Assets
-- **Icons**: Lucide Icons (SVG inline) — simplicidade e consistência
-- **Ilustrações**: Nenhuma — foco em dados
+- **Icons**: Lucide Icons (SVG inline)
 - **Empty states**: Ícone + mensagem + CTA
+- **Gradients**: Backgrounds com gradientes sutis purple
 
 ## 3. Layout & Structure
 
 ### Page Structure
 ```
 ┌─────────────────────────────────────────────────────────┐
-│  Header: Logo + Seletor de Mês                          │
+│  Header: Logo + Seletor de Mês (com setas)              │
 ├─────────────────────────────────────────────────────────┤
 │                                                         │
-│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐   │
-│  │   SALDO     │  │  ENTRADAS   │  │   SAÍDAS    │   │
-│  │   R$5.000   │  │  R$8.000    │  │  R$3.000    │   │
-│  └─────────────┘  └─────────────┘  └─────────────┘   │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐       │
+│  │  ENTRADAS  │  │   SAÍDAS   │  │    SALDO    │       │
+│  │   R$5.000  │  │  R$3.000   │  │   R$2.000   │       │
+│  └─────────────┘  └─────────────┘  └─────────────┘     │
+│                                                         │
+│            ┌─────────────────────────┐                 │
+│            │  + Nova Transação        │                 │
+│            └─────────────────────────┘                 │
 │                                                         │
 │  ┌─────────────────────────────────────────────────┐   │
-│  │  NOVA TRANSAÇÃO                                 │   │
-│  │  [Descrição] [Valor] [+Entrada] [-Saída]       │   │
-│  └─────────────────────────────────────────────────┘   │
-│                                                         │
-│  ┌─────────────────────────────────────────────────┐   │
-│  │  TRANSAÇÕES DO MÊS                              │   │
+│  │  TRANSAÇÕES DO MÊS                               │   │
 │  │  ┌─────────────────────────────────────────┐   │   │
-│  │  │ 📦 Salário          +R$ 5.000    Hoje   │   │   │
-│  │  │ 🛒 Supermercado     -R$ 450     18/05   │   │   │
-│  │  │ ⚡ Conta de luz     -R$ 120     15/05   │   │   │
-│  │  │ 🎮 Assinatura PSN    -R$ 85      10/05   │   │   │
+│  │  │ Salário        +R$ 5.000    Pago    📝🗑️│   │   │
+│  │  │ Supermercado   -R$ 450      Pago    📝🗑️│   │   │
+│  │  │ Aluguel       -R$ 1.500  Pendente  📝🗑️│   │   │
 │  │  └─────────────────────────────────────────┘   │   │
 │  └─────────────────────────────────────────────────┘   │
 │                                                         │
@@ -76,102 +76,120 @@ Text Secondary: #64748B (Slate-500)    — Descrições
 ```
 
 ### Responsive Strategy
-- **Desktop (>1024px)**: 3 cards de resumo em linha, formulário inline
-- **Tablet (768-1024px)**: 3 cards em linha, formulário empilhado
-- **Mobile (<768px)**: Cards empilhados, navegação simplificada
+- **Desktop (>1024px)**: 3 cards de resumo em linha
+- **Tablet (768-1024px)**: 3 cards em linha, botões empilhados
+- **Mobile (<768px)**: Cards empilhados verticalmente
 
 ## 4. Features & Interactions
 
 ### Core Features
 
-#### 4.1 Dashboard Cards (Saldo/Entradas/Saídas)
-- **Saldo**: Soma algébrica de todas entradas menos saídas do mês
-- **Entradas**: Total de valores positivos no mês
-- **Saídas**: Total de valores negativos no mês
-- **Hover**: Sutil elevação do card
-- **Click**: Não aplicável (display only)
+#### 4.1 Dashboard Cards (Entradas/Saídas/Saldo)
+- **Entradas**: Total de valores positivos no mês (verde)
+- **Saídas**: Total de valores negativos no mês (vermelho)
+- **Saldo**: Soma algébrica (amarelo/dourado)
+- **Hover**: Scale 1.02 com glow sutil
 
 #### 4.2 Seletor de Mês
-- Dropdown com meses do ano atual e anterior
+- Navegação com **setas** (← →) nos lados da data
 - Formato: "Maio 2026"
-- Muda contexto de todas as métricas instantaneamente
+- Permite navegar para meses futuros
 - Persiste seleção no localStorage
 
-#### 4.3 Formulário de Nova Transação
+#### 4.3 Modal de Nova Transação
+- Abre ao clicar em "+ Nova Transação"
 - **Campos**:
   - Descrição (texto, obrigatório, max 100 chars)
   - Valor (número, obrigatório, > 0)
-  - Tipo (toggle ou botões: Entrada/Saída)
-- **Botão**: "Adicionar Transação"
-- **Estados**:
-  - Default: Campos vazios, tipo "Entrada" selecionado
-  - Loading: Botão desabilitado com spinner
-  - Success: Feedback visual, campos limpos
-  - Error: Mensagem inline no campo relevante
+  - Tipo (botões: Entrada/Saída)
+  - Data (date picker)
+- **Botão**: "Adicionar"
+- **Estados**: default, loading, success, error
 
 #### 4.4 Lista de Transações
 - Ordenada por data (mais recente primeiro)
-- Cada item mostra: ícone categoria, descrição, valor (colorido), data
-- **Hover**: Background sutil
-- **Delete**: Ícone de lixeira aparece no hover, confirmação antes de deletar
-- **Empty state**: Ilustração + "Nenhuma transação este mês"
+- Cada item mostra:
+  - Descrição
+  - Valor (colorido por tipo)
+  - Badge "Pago" (verde) ou "Pendente" (amarelo)
+  - Ações na **direita**: Editar (📝) e Deletar (🗑️)
+- **Hover**: Background sutil highlight
+- **Empty state**: "Nenhuma transação este mês"
 
 ### Interaction Details
 
 | Elemento | Hover | Click | Loading | Error |
 |----------|-------|-------|---------|-------|
-| Card resumo | Scale 1.01, shadow aumenta | - | - | - |
-| Botão adicionar | bg mais escuro | Adiciona transação | Spinner | Shake + mensagem |
-| Item transação | bg slate-100 | - | - | - |
-| Botão delete | bg red-50 | Confirmação | Spinner | - |
+| Card resumo | Scale 1.02, glow | - | - | - |
+| Botão adicionar | bg mais claro | Abre modal | Spinner | Shake |
+| Month arrow | Scale 1.1 | Muda mês | - | - |
+| Item transação | bg highlight | - | - | - |
+| Botão editar | bg highlight | Abre modal edit | Spinner | - |
+| Botão deletar | bg red | Confirmação | Spinner | - |
+| Badge Pago/Pendente | - | Toggle status | Spinner | - |
 
 ### Edge Cases
-- **Mês sem transações**: Mostrar empty state
-- **Valor muito alto**: Formatar com abreviação (1.000,00)
-- **Descrição vazia**: Bloquear envio com mensagem
-- **Conexão lenta**: Mostrar loading state
+- **Mês sem transações**: Empty state
+- **Valor alto**: Formatar com separador de milhar
+- **Descrição vazia**: Mensagem de erro inline
+- **Conexão lenta**: Loading states
 
 ## 5. Component Inventory
 
 ### SummaryCard
-- **Props**: title, value, type (positive/negative/neutral), icon
+- **Props**: title, value, type (income/expense/balance), icon
 - **States**: default, hover
-- **Styling**: bg-white, rounded-xl, shadow-sm, p-6
+- **Styling**: bg-gradient, rounded-2xl, p-6, text colored
 
 ### MonthSelector
 - **Props**: selectedMonth, onChange
-- **States**: default, open (dropdown)
-- **Styling**: bg-white, rounded-lg, border, cursor-pointer
+- **States**: default
+- **Styling**: flex centered, arrows on sides
+- **Features**: Navegação livre (passado e futuro)
 
-### TransactionForm
-- **Props**: onSubmit, isLoading
-- **States**: default, submitting, success, error
-- **Fields**: description (input), amount (input number), type (toggle)
+### TransactionModal
+- **Props**: isOpen, onClose, onSubmit, initialData?, isLoading
+- **States**: closed, open, submitting
+- **Fields**: description, amount, type (income/expense), date
+- **Modes**: create (new) e edit (existing)
 
 ### TransactionItem
-- **Props**: transaction { id, description, amount, type, date }
-- **States**: default, hover, deleting
-- **Actions**: delete (with confirmation)
+- **Props**: transaction { id, description, amount, type, date, isPaid }
+- **States**: default, hover
+- **Actions**: togglePaid, edit, delete
+- **Layout**: description | value | badge | actions
+
+### TransactionList
+- **Props**: transactions[], onEdit, onDelete, onTogglePaid
+- **Features**: Lista ordenada, divider lines entre items
+
+### AuthPage
+- **Props**: onAuthSuccess
+- **States**: login mode, register mode
+- **Fields**: email, password, name (register only)
+- **Features**: Toggle entre login/registro
 
 ### Button
-- **Variants**: primary, secondary, danger
+- **Variants**: primary (yellow), secondary (purple), danger (red)
 - **States**: default, hover, active, disabled, loading
 
-### Modal (para confirmação de delete)
-- Backdrop blur
-- Centralizado
-- Título + descrição + ações
+### Modal
+- **Props**: isOpen, onClose, title, children
+- **Styling**: backdrop blur, centered, rounded
+
+### Input
+- **Props**: label, type, value, onChange, error?, placeholder
+- **States**: default, focus, error, disabled
 
 ## 6. Technical Approach
 
 ### Stack
 - **Framework**: Vite + React 18
 - **Language**: TypeScript (strict mode)
-- **Styling**: TailwindCSS 3.4
+- **Styling**: TailwindCSS 4
 - **Icons**: Lucide React
-- **State**: React useState/useEffect (simples, sem Redux)
-- **Data**: Mock data + localStorage para persistência
-- **Supabase**: Configurado mas apenas para futuras integrações (frontend first)
+- **State**: React useState/useEffect
+- **Database**: Supabase (Auth + PostgreSQL)
 
 ### Data Model
 
@@ -179,30 +197,34 @@ Text Secondary: #64748B (Slate-500)    — Descrições
 interface Transaction {
   id: string;
   description: string;
-  amount: number; // positivo = entrada, negativo = saída
+  amount: number;
   type: 'income' | 'expense';
-  date: string; // ISO date
+  date: string; // ISO date YYYY-MM-DD
   createdAt: string;
+  isPaid: boolean;
+  userId?: string;
 }
 
 interface AppState {
   transactions: Transaction[];
   selectedMonth: string; // "YYYY-MM"
+  user: SupabaseUser | null;
 }
 ```
 
 ### File Structure
 ```
-src/
+finance-app/src/
 ├── components/
 │   ├── ui/
 │   │   ├── Button.tsx
 │   │   ├── Card.tsx
 │   │   ├── Modal.tsx
 │   │   └── Input.tsx
+│   ├── AuthPage.tsx
 │   ├── SummaryCard.tsx
 │   ├── MonthSelector.tsx
-│   ├── TransactionForm.tsx
+│   ├── TransactionModal.tsx
 │   ├── TransactionList.tsx
 │   └── TransactionItem.tsx
 ├── hooks/
@@ -210,7 +232,8 @@ src/
 ├── lib/
 │   ├── mockData.ts
 │   ├── formatters.ts
-│   └── utils.ts
+│   ├── utils.ts
+│   └── supabase.ts
 ├── types/
 │   └── index.ts
 ├── App.tsx
@@ -218,12 +241,43 @@ src/
 └── index.css
 ```
 
-### Supabase Integration (Future)
-- Auth: Supabase Auth (futuro)
-- Database: transactions table
-- Realtime: subscriptions para sync (futuro)
+### Supabase Schema
+```sql
+CREATE TABLE transactions (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
+  description TEXT NOT NULL,
+  amount NUMERIC NOT NULL,
+  type TEXT NOT NULL CHECK (type IN ('income', 'expense')),
+  date DATE NOT NULL,
+  is_paid BOOLEAN DEFAULT true,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
 
-### Performance
-- Lazy loading de componentes pesados
-- Memoização de cálculos de totais
-- Virtualização se > 100 transações
+ALTER TABLE transactions ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Users can manage their transactions" 
+ON transactions FOR ALL USING (auth.uid() = user_id);
+```
+
+### API Endpoints (via Supabase Client)
+- `POST /transactions` - Criar transação
+- `GET /transactions?user_id=eq.{id}` - Listar do usuário
+- `PATCH /transactions?id=eq.{id}` - Editar
+- `DELETE /transactions?id=eq.{id}` - Deletar
+
+## 7. Implemented Features Checklist
+
+- [x] Tema dark "lofi sunset"
+- [x] Cards de resumo (Entradas/Saídas/Saldo)
+- [x] Navegação por mês com setas
+- [x] Modal de nova transação
+- [x] Lista de transações
+- [x] Badge Pago/Pendente
+- [x] Ações: editar, deletar, marcar pago
+- [x] Tela de autenticação (login/registro)
+- [x] Integração Supabase Auth
+- [x] Integração Supabase CRUD
+- [x] Empty states
+- [x] Formatação de valores monetários
+- [x] Responsive design
