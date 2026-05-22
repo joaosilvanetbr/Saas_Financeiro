@@ -1,0 +1,10 @@
+.minimax
+node_modules
+src
+*.md
+!README.md
+tailwind.config.js
+tsconfig*.json
+eslint.config.js
+postcss.config.js
+vite.config.ts
